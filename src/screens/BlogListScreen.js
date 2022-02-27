@@ -9,9 +9,9 @@ const BlogListScreen = ({navigation}) => {
     return(
         <>
             <FlatList
-            data={state}
-            keyExtractor={(blogPost)=>blogPost.title}
-            renderItem={({item}) => {
+                data={state}
+                keyExtractor={(blogPost)=>blogPost.title}
+                renderItem={({item}) => {
                 return(
                 <TouchableOpacity onPress={() => navigation.navigate('Blog Detail', { id: item.id})}>
                     <View style={styles.rowStyle}>
@@ -22,7 +22,7 @@ const BlogListScreen = ({navigation}) => {
                     </View>
                 </TouchableOpacity>
                 );
-            }}
+                }}
             />
         </>
     );

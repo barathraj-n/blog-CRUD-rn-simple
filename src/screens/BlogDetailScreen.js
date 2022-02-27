@@ -10,7 +10,8 @@ const BlogDetailScreen = ({route}) => {
 
     return(
         <>
-        <Text>{blogPost.title}</Text>
+            <Text>{blogPost.title}</Text>
+            <Text>{blogPost.content}</Text>
         </>
     )
 }
