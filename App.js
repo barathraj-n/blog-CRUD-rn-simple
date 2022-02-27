@@ -12,9 +12,6 @@ import { useNavigation } from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-
-  // const navigation = useNavigation();
-
   return (
     <NavigationContainer>
       <Stack.Navigator 
