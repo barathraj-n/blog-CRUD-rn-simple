@@ -1,16 +1,42 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, FlatList, StyleSheet, Button, TouchableOpacity} from 'react-native';
 import { Context as BlogContext } from '../context/BlogContext';
 import {Feather} from '@expo/vector-icons'
 
 const BlogListScreen = ({navigation}) => {
-    console.log(navigation)
-    const {state, deleteBlogPost} = useContext(BlogContext);
+    const {state, deleteBlogPost, getBlogPosts} = useContext(BlogContext);
+
+    useEffect(() => {
+        getBlogPosts();
+
+        const listener = navigation.addListener('focus', () => {
+            getBlogPosts();
+        });
+
+        return () => {
+            listener();
+        };
+
+    }, []);
+
+    // useEffect(() => {
+    //     getBlogPosts();
+    
+    //     const listener = navigation.addListener('didFocus', () => {
+    //       getBlogPosts();
+    //     });
+    
+    //     return () => {
+    //       listener.remove();
+    //     };
+    //   }, []);
+
     return(
         <>
             <FlatList
                 data={state}
-                keyExtractor={(blogPost)=>blogPost.title}
+                // key={blogPost => blogPost.id}
+                keyExtractor={(blogPost) => blogPost.id}
                 renderItem={({item}) => {
                 return(
                 <TouchableOpacity onPress={() => navigation.navigate('Blog Detail', { id: item.id})}>
@@ -28,16 +54,6 @@ const BlogListScreen = ({navigation}) => {
     );
 }
 
-BlogListScreen.navigationOptions = ({navigation}) => {
-    return {
-        headerRight: <TouchableOpacity onPress={() => navigation.navigate('Create a Blog')}>
-              <Feather
-                name='plus' 
-                size={30}
-              />
-            </TouchableOpacity>
-    }
-}
 const styles = StyleSheet.create({
     rowStyle: {
         flexDirection: 'row',

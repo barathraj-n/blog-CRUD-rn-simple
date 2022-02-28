@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import { Context as BlogContext } from '../context/BlogContext';
 
 const BlogDetailScreen = ({route}) => {
@@ -9,11 +9,29 @@ const BlogDetailScreen = ({route}) => {
     const blogPost = state.find((blogPost) => blogPost.id === id)
 
     return(
-        <>
-            <Text>{blogPost.title}</Text>
-            <Text>{blogPost.content}</Text>
-        </>
+        <View style={styles.container}>
+            <Text style={styles.titleStyle}>{blogPost.title}</Text>
+            <Text style={styles.contentStyle}>{blogPost.content}</Text>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        borderWidth: 1,
+        borderRadius: 5,
+        marginTop: 10,
+        marginHorizontal: 10,
+        padding: 10,
+    },
+    titleStyle:{
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    contentStyle:{
+        fontSize: 18,
+        paddingTop: 10,
+    }
+});
 
 export default BlogDetailScreen;
